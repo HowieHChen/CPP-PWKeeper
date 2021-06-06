@@ -38,8 +38,7 @@ void BaseDialog::on_buttonCancel_clicked()
     this->close();
 }
 
-
-void BaseDialog::on_pushButton_clicked()
+void BaseDialog::on_buttonOK_clicked()
 {
     emit buttonOK_clicked();
     this->close();

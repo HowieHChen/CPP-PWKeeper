@@ -15,8 +15,10 @@ SOURCES += \
     iniservice.cpp \
     main.cpp \
     mainpage.cpp \
+    passwordmanage.cpp \
     signinpage.cpp \
     signuppage.cpp \
+    switchcontrol.cpp \
     userprofile.cpp
 
 HEADERS += \
@@ -25,8 +27,10 @@ HEADERS += \
     forgetpwpage.h \
     iniservice.h \
     mainpage.h \
+    passwordmanage.h \
     signinpage.h \
     signuppage.h \
+    switchcontrol.h \
     userprofile.h
 
 FORMS += \
@@ -44,3 +48,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     res.qrc
+
+DISTFILES += \
+    Res/close.png \
+    Res/hide.png

@@ -23,6 +23,8 @@ class SignInPage : public BasePage
 public:
     SignInPage(QWidget *parent = nullptr);
     ~SignInPage();
+
+    void loadingSettings();
 signals:
 
 private slots:

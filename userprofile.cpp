@@ -7,10 +7,13 @@ UserProfile::UserProfile()
 }
 
 //读取所有用户名和配置信息
-void UserProfile::readAllUser()
+void UserProfile::readProfile()
 {
     userAll.clear();
     userAll = INIActivated->getAllValue("UserList");
+    lastName=INIActivated->getValue("Settings","LastName");
+    lastPassword=INIActivated->getValue("Settings","LastPassword");
+    lastMail=INIActivated->getValue(lastName,"Mail");
     if(INIActivated->getValue("Settings","SaveLastName")=="True" ||
        INIActivated->getValue("Settings","SaveLastName")=="true" )
     {
@@ -40,6 +43,19 @@ void UserProfile::readAllUser()
     }
 }
 
+void UserProfile::saveProfile()
+{
+    INIActivated->setValue("Settings","LastName",lastName);
+    INIActivated->setValue("Settings","LastPassword",lastPassword);
+}
+
+void UserProfile::saveSettings()
+{
+    INIActivated->setValue("Settings","SaveLastName",(saveLastName?"True":"False"));
+    INIActivated->setValue("Settings","saveLastPassword",(saveLastPassword?"True":"False"));
+    INIActivated->setValue("Settings","closeDirectly",(closeDirectly?"True":"False"));
+}
+
 //返回所有用户名
 QStringList UserProfile::getAllUser()
 {
@@ -58,6 +74,12 @@ QString UserProfile::getLastPassword()
     return lastPassword;
 }
 
+//返回上次登陆密码
+QString UserProfile::getLastMail()
+{
+    return lastMail;
+}
+
 //用户登录
 bool UserProfile::userSignIn(QString tName,QString tPassword)
 {
@@ -68,6 +90,7 @@ bool UserProfile::userSignIn(QString tName,QString tPassword)
         {
             lastName = tName;
             lastPassword = tPassword;
+            saveProfile();
             qDebug()<<"success";
             return true;
         }
@@ -84,6 +107,8 @@ bool UserProfile::userResetPW(QString tName,QString tOldPassword,QString tNewPas
         if(INIActivated->getValue(tName,"Password")==tOldPassword)
         {
             INIActivated->setValue(tName,"Password",tNewPassword);
+            lastName = "";
+            lastPassword = "";
             return true;
         }
     }
@@ -98,6 +123,8 @@ bool UserProfile::userForgetPW(QString tName,QString tMail,QString tNewPassword)
         if(INIActivated->getValue(tName,"Mail")==tMail)
         {
             INIActivated->setValue(tName,"Password",tNewPassword);
+            lastName = "";
+            lastPassword = "";
             return true;
         }
     }
@@ -120,7 +147,7 @@ bool UserProfile::userSignUp(QString tName,QString tMail,QString tPassword)
         INIActivated->setValue(tName,"Name",tName);
         INIActivated->setValue(tName,"Password",tPassword);
         INIActivated->setValue(tName,"Mail",tMail);
-        readAllUser();
+        readProfile();
         return true;
     }
 }

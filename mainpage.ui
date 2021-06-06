@@ -34,10 +34,10 @@
   <widget class="QStackedWidget" name="stackedWidget">
    <property name="geometry">
     <rect>
-     <x>140</x>
-     <y>50</y>
-     <width>671</width>
-     <height>561</height>
+     <x>170</x>
+     <y>90</y>
+     <width>641</width>
+     <height>521</height>
     </rect>
    </property>
    <property name="font">
@@ -46,13 +46,795 @@
     </font>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>2</number>
    </property>
-   <widget class="QWidget" name="page_view"/>
-   <widget class="QWidget" name="page_add"/>
-   <widget class="QWidget" name="page_out"/>
-   <widget class="QWidget" name="page_settings">
+   <widget class="QWidget" name="page_view">
+    <widget class="QListWidget" name="listWidget_allLabel">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>310</width>
+       <height>450</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Microsoft YaHei UI</family>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QListWidget
+{
+	background:transparent;
+	border: transparent;
+}
+QListWidget::item
+{
+	background:transparent;
+	border: transparent;
+	color:#000000;
+	padding-left: 10px;
+	height:40px;
+	
+}
+QListWidget::item:hover
+{
+	background-color:#d0e8ff;
+	border: transparent;
+	border-radius:20px;
+	color:#004182;
+	padding-left: 10px;
+}
+QListWidget::item:selected
+{
+	background-color:#d0e8ff;
+	border: 0px;
+	border-radius:20px;
+	color:#004182;
+	padding-left: 10px;
+}
+
+QScrollBar
+{
+    width:8px;
+    background:transparent;
+	border-radius:4px;
+    padding-top:0px;   /*上预留位置*/
+    padding-bottom:0px;    /*下预留位置*/}/*滚动条中滑块的样式*/QScrollBar::handle
+{
+    width:6px;
+    background:#cdcdcd;
+    border-radius:3px;
+    min-height:20px;
+}/*鼠标触及滑块样式*/
+QScrollBar::handle:hover
+{
+    width:8px;
+    background:#a7a7a7;
+    border-radius:4px;
+    min-height:20;
+}/*设置下箭头*/
+QScrollBar::add-line
+{
+    height:0px;
+    width:0px;
+    background:transparent;
+}/*设置上箭头*/
+QScrollBar::sub-line
+{
+    height:0px;
+    width:0px;
+    background:transparent;
+}</string>
+     </property>
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
+     </property>
+     <property name="sizeAdjustPolicy">
+      <enum>QAbstractScrollArea::AdjustIgnored</enum>
+     </property>
+     <property name="resizeMode">
+      <enum>QListView::Fixed</enum>
+     </property>
+     <property name="gridSize">
+      <size>
+       <width>0</width>
+       <height>44</height>
+      </size>
+     </property>
+     <property name="itemAlignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_View">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>0</y>
+       <width>70</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Microsoft YaHei UI</family>
+       <pointsize>24</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>查询</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_15others">
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>290</y>
+       <width>250</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Microsoft YaHei UI</family>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit{
+	border: 1px solid gray;
+	background-color:transparent;
+	padding:0 0 0 8px;
+	border-radius:8px;
+	color:#666666;
+}
+QLineEdit:focus{
+	color:#000000;
+}</string>
+     </property>
+     <property name="placeholderText">
+      <string>备注</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_13password">
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>170</y>
+       <width>250</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Microsoft YaHei UI</family>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit{
+	border: 1px solid gray;
+	background-color:transparent;
+	padding:0 0 0 8px;
+	border-radius:8px;
+	color:#666666;
+}
+QLineEdit:focus{
+	color:#000000;
+}</string>
+     </property>
+     <property name="placeholderText">
+      <string>密码</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_14target">
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>230</y>
+       <width>250</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Microsoft YaHei UI</family>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit{
+	border: 1px solid gray;
+	background-color:transparent;
+	padding:0 0 0 8px;
+	border-radius:8px;
+	color:#666666;
+}
+QLineEdit:focus{
+	color:#000000;
+}</string>
+     </property>
+     <property name="placeholderText">
+      <string>网站或应用</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_12name">
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>110</y>
+       <width>250</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Microsoft YaHei UI</family>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit{
+	border: 1px solid gray;
+	background-color:transparent;
+	padding:0 0 0 8px;
+	border-radius:8px;
+	color:#666666;
+}
+QLineEdit:focus{
+	color:#000000;
+}</string>
+     </property>
+     <property name="placeholderText">
+      <string>用户名</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_11label">
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>50</y>
+       <width>250</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Microsoft YaHei UI</family>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit{
+	border: 1px solid gray;
+	background-color:transparent;
+	padding:0 0 0 8px;
+	border-radius:8px;
+	color:#666666;
+}
+QLineEdit:focus{
+	color:#000000;
+}</string>
+     </property>
+     <property name="placeholderText">
+      <string>标签</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_save">
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>440</y>
+       <width>250</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Microsoft YaHei UI</family>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton:enabled{
+	border-width:0;
+	background-color:#0a66c2;
+	border-radius:20px;
+	color:#ffffff;
+}
+QPushButton:hover{
+	border-width:0;
+	background-color:#004182;
+	border-radius:20px;
+	color:#ffffff;
+}
+QPushButton:pressed{
+	border-width:0;
+	background-color:#004182;
+	border-radius:20px;
+	color:#ffffff;
+}
+QPushButton:focus{
+	border-width:0;
+	background-color:#004182;
+	border-radius:20px;
+	color:#ffffff;
+}</string>
+     </property>
+     <property name="text">
+      <string>保存修改</string>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_delete">
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>380</y>
+       <width>250</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Microsoft YaHei UI</family>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton:enabled{
+	border-width:0;
+	background-color:#BF360C;
+	border-radius:20px;
+	color:#ffffff;
+}
+QPushButton:hover{
+	border-width:0;
+	background-color:#B71C1C;
+	border-radius:20px;
+	color:#ffffff;
+}
+QPushButton:pressed{
+	border-width:0;
+	background-color:#B71C1C;
+	border-radius:20px;
+	color:#ffffff;
+}
+QPushButton:focus{
+	border-width:0;
+	background-color:#B71C1C;
+	border-radius:20px;
+	color:#ffffff;
+}</string>
+     </property>
+     <property name="text">
+      <string>删除</string>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="page_add">
+    <widget class="QPushButton" name="pushButton_additem">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>400</y>
+       <width>350</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Microsoft YaHei UI</family>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton:enabled{
+	border-width:0;
+	background-color:#0a66c2;
+	border-radius:20px;
+	color:#ffffff;
+}
+QPushButton:hover{
+	border-width:0;
+	background-color:#004182;
+	border-radius:20px;
+	color:#ffffff;
+}
+QPushButton:pressed{
+	border-width:0;
+	background-color:#004182;
+	border-radius:20px;
+	color:#ffffff;
+}
+QPushButton:focus{
+	border-width:0;
+	background-color:#004182;
+	border-radius:20px;
+	color:#ffffff;
+}</string>
+     </property>
+     <property name="text">
+      <string>保存</string>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_Add">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>0</y>
+       <width>70</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Microsoft YaHei UI</family>
+       <pointsize>24</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>添加</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_21label">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>70</y>
+       <width>350</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Microsoft YaHei UI</family>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit{
+	border: 1px solid gray;
+	background-color:transparent;
+	padding:0 0 0 8px;
+	border-radius:8px;
+	color:#666666;
+}
+QLineEdit:focus{
+	color:#000000;
+}</string>
+     </property>
+     <property name="placeholderText">
+      <string>标签</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_22name">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>130</y>
+       <width>350</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Microsoft YaHei UI</family>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit{
+	border: 1px solid gray;
+	background-color:transparent;
+	padding:0 0 0 8px;
+	border-radius:8px;
+	color:#666666;
+}
+QLineEdit:focus{
+	color:#000000;
+}</string>
+     </property>
+     <property name="placeholderText">
+      <string>用户名</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_23password">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>190</y>
+       <width>350</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Microsoft YaHei UI</family>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit{
+	border: 1px solid gray;
+	background-color:transparent;
+	padding:0 0 0 8px;
+	border-radius:8px;
+	color:#666666;
+}
+QLineEdit:focus{
+	color:#000000;
+}</string>
+     </property>
+     <property name="placeholderText">
+      <string>密码</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_25others">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>310</y>
+       <width>350</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Microsoft YaHei UI</family>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit{
+	border: 1px solid gray;
+	background-color:transparent;
+	padding:0 0 0 8px;
+	border-radius:8px;
+	color:#666666;
+}
+QLineEdit:focus{
+	color:#000000;
+}</string>
+     </property>
+     <property name="placeholderText">
+      <string>备注</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_24target">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>250</y>
+       <width>350</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Microsoft YaHei UI</family>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit{
+	border: 1px solid gray;
+	background-color:transparent;
+	padding:0 0 0 8px;
+	border-radius:8px;
+	color:#666666;
+}
+QLineEdit:focus{
+	color:#000000;
+}</string>
+     </property>
+     <property name="placeholderText">
+      <string>网站或应用</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_createPassword">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>360</y>
+       <width>110</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Microsoft YaHei UI</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton:enabled{
+	border-width:0;
+	background-color:transparent;
+	border-radius:20px;
+	color:#0a66c2;
+}
+QPushButton:hover{
+	border-width:0;
+	background-color:#d0e8ff;
+	border-radius:15px;
+	color:#0a66c2;
+}
+QPushButton:pressed{
+	border-width:0;
+	background-color:#d0e8ff;
+	border-radius:15px;
+	color:#0a66c2;
+}</string>
+     </property>
+     <property name="text">
+      <string>生成随机密码</string>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
     <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>360</y>
+       <width>130</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Microsoft YaHei UI</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>密码不安全？试试</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="page_out">
+    <widget class="QPushButton" name="pushButton_output">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>150</y>
+       <width>250</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Microsoft YaHei UI</family>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton:enabled{
+	border-width:0;
+	background-color:#0a66c2;
+	border-radius:20px;
+	color:#ffffff;
+}
+QPushButton:hover{
+	border-width:0;
+	background-color:#004182;
+	border-radius:20px;
+	color:#ffffff;
+}
+QPushButton:pressed{
+	border-width:0;
+	background-color:#004182;
+	border-radius:20px;
+	color:#ffffff;
+}
+QPushButton:focus{
+	border-width:0;
+	background-color:#004182;
+	border-radius:20px;
+	color:#ffffff;
+}</string>
+     </property>
+     <property name="text">
+      <string>导出</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_Out">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>0</y>
+       <width>70</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Microsoft YaHei UI</family>
+       <pointsize>24</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>导出</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_fileName">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>90</y>
+       <width>250</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Microsoft YaHei UI</family>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit{
+	border: 1px solid gray;
+	background-color:transparent;
+	padding:0 0 0 8px;
+	border-radius:8px;
+	color:#666666;
+}
+QLineEdit:focus{
+	color:#000000;
+}</string>
+     </property>
+     <property name="placeholderText">
+      <string>文件名</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="page_settings">
+    <widget class="QLabel" name="label_Settings">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -77,7 +859,7 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>270</y>
+       <y>250</y>
        <width>70</width>
        <height>40</height>
       </rect>
@@ -98,7 +880,7 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>320</y>
+       <y>300</y>
        <width>352</width>
        <height>116</height>
       </rect>
@@ -171,8 +953,8 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>440</y>
-       <width>631</width>
+       <y>420</y>
+       <width>600</width>
        <height>30</height>
       </rect>
      </property>
@@ -190,8 +972,8 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>470</y>
-       <width>631</width>
+       <y>450</y>
+       <width>600</width>
        <height>30</height>
       </rect>
      </property>
@@ -202,15 +984,21 @@
       </font>
      </property>
      <property name="text">
-      <string>开源项目地址：https://github.com/HowieHChen/CPP-PWKeeper</string>
+      <string>开源项目地址：&lt;a style='color: black;text-decoration: none;'href = 'https://github.com/HowieHChen/CPP-PWKeeper'&gt;https://github.com/HowieHChen/CPP-PWKeeper&lt;/a&gt;</string>
+     </property>
+     <property name="openExternalLinks">
+      <bool>true</bool>
+     </property>
+     <property name="textInteractionFlags">
+      <set>Qt::LinksAccessibleByMouse</set>
      </property>
     </widget>
     <widget class="QLabel" name="label_7">
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>500</y>
-       <width>631</width>
+       <y>480</y>
+       <width>600</width>
        <height>30</height>
       </rect>
      </property>
@@ -224,20 +1012,173 @@
       <string>联系方式：howie.c@outlook.com</string>
      </property>
     </widget>
+    <widget class="QLabel" name="label_8">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>60</y>
+       <width>100</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Microsoft YaHei UI</family>
+       <pointsize>12</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>记住用户</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_9">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>100</y>
+       <width>100</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Microsoft YaHei UI</family>
+       <pointsize>12</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>记住密码</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_10">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>140</y>
+       <width>100</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Microsoft YaHei UI</family>
+       <pointsize>12</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>直接关闭窗口</string>
+     </property>
+    </widget>
+    <widget class="QWidget" name="verticalLayoutWidget_3">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>50</y>
+       <width>71</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="container_saveUser">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="sizeConstraint">
+       <enum>QLayout::SetFixedSize</enum>
+      </property>
+      <property name="leftMargin">
+       <number>4</number>
+      </property>
+      <property name="topMargin">
+       <number>14</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>4</number>
+      </property>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="verticalLayoutWidget_4">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>90</y>
+       <width>71</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="container_savePassword">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="sizeConstraint">
+       <enum>QLayout::SetFixedSize</enum>
+      </property>
+      <property name="leftMargin">
+       <number>4</number>
+      </property>
+      <property name="topMargin">
+       <number>14</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>4</number>
+      </property>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="verticalLayoutWidget_5">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>130</y>
+       <width>71</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="container_closeDirectly">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="sizeConstraint">
+       <enum>QLayout::SetFixedSize</enum>
+      </property>
+      <property name="leftMargin">
+       <number>4</number>
+      </property>
+      <property name="topMargin">
+       <number>14</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>4</number>
+      </property>
+     </layout>
+    </widget>
    </widget>
   </widget>
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>50</y>
-     <width>131</width>
-     <height>561</height>
+     <y>80</y>
+     <width>154</width>
+     <height>531</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <property name="leftMargin">
-     <number>12</number>
+     <number>2</number>
     </property>
     <property name="topMargin">
      <number>12</number>
@@ -250,22 +1191,202 @@
     </property>
     <item>
      <widget class="QPushButton" name="pushButton_view">
+      <property name="minimumSize">
+       <size>
+        <width>140</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>140</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Microsoft YaHei UI</family>
+        <pointsize>12</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#pushButton_view:enabled{
+	border-width:0;
+	background-color:transparent;
+	color:#000000;
+	text-align: left;
+	padding-left: 18px;
+}
+QPushButton#pushButton_view:hover{
+	border-width:0;
+	background-color:transparent;
+	border-top-right-radius:20px;
+	border-bottom-right-radius:20px;
+	color:#004182;
+	text-align: left;
+	padding-left: 19px;
+}
+QPushButton#pushButton_view:checked{
+	border-width:0;
+	background-color:#d0e8ff;
+	border-top-right-radius:20px;
+	border-bottom-right-radius:20px;
+	color:#004182;
+	text-align: left;
+	padding-left: 19px;
+}</string>
+      </property>
       <property name="text">
        <string>查询</string>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+      <property name="autoExclusive">
+       <bool>true</bool>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QPushButton" name="pushButton_add">
+      <property name="minimumSize">
+       <size>
+        <width>140</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>140</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Microsoft YaHei UI</family>
+        <pointsize>12</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#pushButton_add:enabled{
+	border-width:0;
+	background-color:transparent;
+	color:#000000;
+	text-align: left;
+	padding-left: 18px;
+}
+QPushButton#pushButton_add:hover{
+	border-width:0;
+	background-color:transparent;
+	border-top-right-radius:20px;
+	border-bottom-right-radius:20px;
+	color:#004182;
+	text-align: left;
+	padding-left: 19px;
+}
+QPushButton#pushButton_add:checked{
+	border-width:0;
+	background-color:#d0e8ff;
+	border-top-right-radius:20px;
+	border-bottom-right-radius:20px;
+	color:#004182;
+	text-align: left;
+	padding-left: 19px;
+}</string>
+      </property>
       <property name="text">
        <string>添加</string>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+      <property name="autoExclusive">
+       <bool>true</bool>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QPushButton" name="pushButton_out">
+      <property name="minimumSize">
+       <size>
+        <width>140</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>140</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Microsoft YaHei UI</family>
+        <pointsize>12</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#pushButton_out:enabled{
+	border-width:0;
+	background-color:transparent;
+	color:#000000;
+	text-align: left;
+	padding-left: 18px;
+}
+QPushButton#pushButton_out:hover{
+	border-width:0;
+	background-color:transparent;
+	border-top-right-radius:20px;
+	border-bottom-right-radius:20px;
+	color:#004182;
+	text-align: left;
+	padding-left: 19px;
+}
+QPushButton#pushButton_out:checked{
+	border-width:0;
+	background-color:#d0e8ff;
+	border-top-right-radius:20px;
+	border-bottom-right-radius:20px;
+	color:#004182;
+	text-align: left;
+	padding-left: 19px;
+}</string>
+      </property>
       <property name="text">
        <string>导出</string>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+      <property name="autoExclusive">
+       <bool>true</bool>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
       </property>
      </widget>
     </item>
@@ -284,15 +1405,133 @@
     </item>
     <item>
      <widget class="QPushButton" name="pushButton_signout">
+      <property name="minimumSize">
+       <size>
+        <width>140</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>140</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Microsoft YaHei UI</family>
+        <pointsize>12</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#pushButton_signout:enabled{
+	border-width:0;
+	background-color:transparent;
+	color:#000000;
+	text-align: left;
+	padding-left: 18px;
+}
+QPushButton#pushButton_signout:hover{
+	border-width:0;
+	background-color:transparent;
+	border-top-right-radius:20px;
+	border-bottom-right-radius:20px;
+	color:#004182;
+	text-align: left;
+	padding-left: 19px;
+}
+QPushButton#pushButton_signout:checked{
+	border-width:0;
+	background-color:#d0e8ff;
+	border-top-right-radius:20px;
+	border-bottom-right-radius:20px;
+	color:#004182;
+	text-align: left;
+	padding-left: 19px;
+}</string>
+      </property>
       <property name="text">
        <string>注销</string>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+      <property name="autoExclusive">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QPushButton" name="pushButton_settings">
+      <property name="minimumSize">
+       <size>
+        <width>140</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>140</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Microsoft YaHei UI</family>
+        <pointsize>12</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#pushButton_settings:enabled{
+	border-width:0;
+	background-color:transparent;
+	color:#000000;
+	text-align: left;
+	padding-left: 18px;
+}
+QPushButton#pushButton_settings:hover{
+	border-width:0;
+	background-color:transparent;
+	border-top-right-radius:20px;
+	border-bottom-right-radius:20px;
+	color:#004182;
+	text-align: left;
+	padding-left: 19px;
+}
+QPushButton#pushButton_settings:checked{
+	border-width:0;
+	background-color:#d0e8ff;
+	border-top-right-radius:20px;
+	border-bottom-right-radius:20px;
+	color:#004182;
+	text-align: left;
+	padding-left: 19px;
+}</string>
+      </property>
       <property name="text">
        <string>设置</string>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+      <property name="autoExclusive">
+       <bool>true</bool>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
       </property>
      </widget>
     </item>

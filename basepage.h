@@ -30,6 +30,7 @@ public:
 
     void initPage();
     void recyclePage();
+    void largeTitle();
 
     void mousePressEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
@@ -38,6 +39,8 @@ public:
     void createActions();
     void createMenu();
 
+
+    void refreshCloseDirectly(bool tclose);
 private slots:
     void on_toolButton_Minimize_clicked();
     void on_toolButton_Quit_clicked();
@@ -49,6 +52,8 @@ signals:
 
 private:
     Ui::BasePage *ui;
+
+    bool closeDirectly=0;
 };
 
 #endif // BASEPAGE_H

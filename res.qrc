@@ -1,5 +1,4 @@
-<!DOCTYPE RCC>
-<RCC version="1.0">
+<RCC>
     <qresource prefix="/fonts">
         <file alias="roboto_black">Res/fonts/Roboto-Black.ttf</file>
         <file alias="roboto_bold">Res/fonts/Roboto-Bold.ttf</file>
@@ -970,5 +969,7 @@
         <file>Res/icons/social/svg/production/ic_sentiment_very_satisfied_24px.svg</file>
         <file>Res/icons/social/svg/production/ic_share_24px.svg</file>
         <file>Res/icons/social/svg/production/ic_whatshot_24px.svg</file>
+        <file>Res/icons/ui/close.png</file>
+        <file>Res/icons/ui/hide.png</file>
     </qresource>
 </RCC>

@@ -71,7 +71,7 @@
    </property>
    <property name="styleSheet">
     <string notr="true">QFrame#BaseFrame{
-	background:#f6f6f6;
+	background:#f6f6f6;	
 	border-radius:10px;
 }</string>
    </property>
@@ -90,12 +90,12 @@
       <x>0</x>
       <y>0</y>
       <width>801</width>
-      <height>44</height>
+      <height>54</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <property name="spacing">
-      <number>12</number>
+      <number>2</number>
      </property>
      <property name="leftMargin">
       <number>12</number>
@@ -110,7 +110,7 @@
       <number>12</number>
      </property>
      <item>
-      <widget class="QLabel" name="label_Application">
+      <widget class="QLabel" name="label_ApplicationSmall">
        <property name="styleSheet">
         <string notr="true">font: 75 12pt &quot;Samsung Sharp Sans&quot;;</string>
        </property>
@@ -134,6 +134,12 @@
      </item>
      <item>
       <widget class="QToolButton" name="toolButton_Minimize">
+       <property name="minimumSize">
+        <size>
+         <width>30</width>
+         <height>30</height>
+        </size>
+       </property>
        <property name="font">
         <font>
          <family>Samsung Sharp Sans</family>
@@ -144,13 +150,43 @@
        <property name="focusPolicy">
         <enum>Qt::NoFocus</enum>
        </property>
+       <property name="styleSheet">
+        <string notr="true">QToolButton:enabled{
+	border-width:0;
+	background-color:transparent;
+	border-radius:20px;
+	color:#000000;
+}
+QToolButton:hover{
+	border-width:0;
+	background-color:#d0e8ff;
+	border-radius:15px;
+	color:#0a66c2;
+}
+QToolButton:pressed{
+	border-width:0;
+	background-color:#d0e8ff;
+	border-radius:15px;
+	color:#0a66c2;
+}</string>
+       </property>
        <property name="text">
-        <string>_</string>
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="res.qrc">
+         <normaloff>:/icons/Res/icons/ui/hide.png</normaloff>:/icons/Res/icons/ui/hide.png</iconset>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QToolButton" name="toolButton_Quit">
+       <property name="minimumSize">
+        <size>
+         <width>30</width>
+         <height>30</height>
+        </size>
+       </property>
        <property name="font">
         <font>
          <family>Samsung Sharp Sans</family>
@@ -161,15 +197,69 @@
        <property name="focusPolicy">
         <enum>Qt::NoFocus</enum>
        </property>
+       <property name="styleSheet">
+        <string notr="true">QToolButton:enabled{
+	border-width:0;
+	background-color:transparent;
+	border-radius:20px;
+	color:#000000;
+}
+QToolButton:hover{
+	border-width:0;
+	background-color:#d0e8ff;
+	border-radius:15px;
+	color:#0a66c2;
+}
+QToolButton:pressed{
+	border-width:0;
+	background-color:#d0e8ff;
+	border-radius:15px;
+	color:#0a66c2;
+}</string>
+       </property>
        <property name="text">
-        <string>X</string>
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="res.qrc">
+         <normaloff>:/icons/Res/icons/ui/close.png</normaloff>:/icons/Res/icons/ui/close.png</iconset>
        </property>
       </widget>
      </item>
     </layout>
    </widget>
+   <widget class="QLabel" name="label_ApplicationLarge">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>140</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Samsung Sharp Sans</family>
+      <pointsize>18</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>PWKeeper</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="res.qrc"/>
+ </resources>
  <connections/>
 </ui>

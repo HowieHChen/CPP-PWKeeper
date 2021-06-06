@@ -11,7 +11,8 @@ SignInPage::SignInPage(QWidget *parent)
     SignInPage::setTabOrder(ui->lineEdit_Password,ui->lineEdit_Name);
     initPage();
     currentUser = new UserProfile;
-    currentUser->readAllUser();
+    currentUser->readProfile();
+    loadingSettings();
 }
 
 SignInPage::~SignInPage()
@@ -19,6 +20,25 @@ SignInPage::~SignInPage()
     delete ui;
 }
 
+void SignInPage::loadingSettings()
+{
+    if(currentUser->saveLastName)
+    {
+        ui->lineEdit_Name->setText(currentUser->getLastName());
+    }
+    else
+    {
+        ui->lineEdit_Name->clear();
+    }
+    if(currentUser->saveLastPassword)
+    {
+        ui->lineEdit_Password->setText(currentUser->getLastPassword());
+    }
+    else
+    {
+        ui->lineEdit_Password->clear();
+    }
+}
 
 void SignInPage::on_pushButton_SignIn_clicked()
 {
@@ -42,6 +62,8 @@ void SignInPage::on_pushButton_SignIn_clicked()
     if(currentUser->userSignIn(tName,tPassword))
     {
         recyclePage();
+        delete currentUser;
+        currentUser = NULL;
         this->newMain = new MainPage;
         connect(newMain,SIGNAL(mSignalShowSignIN()),this,SLOT(on_signOutShowSignIn()));
         //connect(newForget,SIGNAL(SignalForgetPW(QString,QString,QString,bool&,int&)),this,SLOT(on_doForgetPW(QString,QString,QString,bool&,int&)));
@@ -85,6 +107,9 @@ void SignInPage::on_signOutShowSignIn()
 {
     this->show();
     initPage();
+    currentUser = new UserProfile;
+    currentUser->readProfile();
+    loadingSettings();
 }
 
 void SignInPage::on_doSignUp(QString tName,QString tPassword,QString tMail,bool &tResult,int &tReasonF)
@@ -101,6 +126,7 @@ void SignInPage::on_doSignUp(QString tName,QString tPassword,QString tMail,bool 
     {
         tResult=true;
         tReasonF=2;
+        loadingSettings();
     }
 }
 
@@ -122,5 +148,7 @@ void SignInPage::on_doForgetPW(QString tName,QString tNewPassword,QString tMail,
     {
         tResult=true;
         tReasonF=3;
+        loadingSettings();
     }
 }
+

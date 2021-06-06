@@ -15,6 +15,7 @@ BasePage::BasePage(QWidget *parent) :
     shadow->setColor(QColor(102,102,102));
     shadow->setBlurRadius(20);
     ui->BaseFrame->setGraphicsEffect(shadow);
+    ui->label_ApplicationLarge->hide();
 }
 
 BasePage::~BasePage()
@@ -39,6 +40,13 @@ void BasePage::initPage()
 void BasePage::recyclePage()
 {
     delete systemtrayicon;
+    systemtrayicon = NULL;
+}
+
+void BasePage::largeTitle()
+{
+    ui->label_ApplicationSmall->hide();
+    ui->label_ApplicationLarge->show();
 }
 
 //最小化按钮
@@ -50,7 +58,14 @@ void BasePage::on_toolButton_Minimize_clicked()
 //关闭按钮
 void BasePage::on_toolButton_Quit_clicked()
 {
-    this->hide();
+    if(closeDirectly)
+    {
+        on_exitAppAction();
+    }
+    else
+    {
+        this->hide();
+    }
 }
 
 //自定义标题栏事件
@@ -130,5 +145,12 @@ void BasePage::on_showMainAction()
 
 void BasePage::on_exitAppAction()
 {
+    delete systemtrayicon;
+    systemtrayicon=NULL;
     exit(0);
+}
+
+void BasePage::refreshCloseDirectly(bool tclose)
+{
+    closeDirectly = tclose;
 }

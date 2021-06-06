@@ -16,10 +16,14 @@ public:
     bool saveLastPassword;
     bool closeDirectly;
 
-    void readAllUser();
+    void readProfile();
+    void saveProfile();
+    void saveSettings();
+
     QStringList getAllUser();
     QString getLastName();
     QString getLastPassword();
+    QString getLastMail();
 
     bool userSignIn(QString tName,QString tPassword);
     bool userResetPW(QString tName,QString tOldPassword,QString tNewPassword);
@@ -35,6 +39,7 @@ private:
     QString userPassword;
     QString lastName;
     QString lastPassword;
+    QString lastMail;
 };
 
 #endif // USERPROFILE_H

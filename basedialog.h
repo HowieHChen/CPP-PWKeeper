@@ -19,7 +19,7 @@ public:
 
 private slots:
     void on_buttonCancel_clicked();
-    void on_pushButton_clicked();
+    void on_buttonOK_clicked();
 
 signals:
     void buttonCancel_clicked();
