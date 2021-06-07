@@ -10,7 +10,7 @@ void INIService::connectINI(QString tFilePath)
 {
     QString fileFullName = QCoreApplication::applicationDirPath() + tFilePath;
     activatedINI = new QSettings(fileFullName, QSettings::IniFormat);
-    qDebug()<<"connectINI"<<fileFullName;
+    //qDebug()<<"connectINI "<<fileFullName;
 }
 
 //查询键是否存在
@@ -31,7 +31,7 @@ bool INIService::sectionExist(QString tSection)
     return resultExist;
 }
 
-//获取指定节点的键值
+//获取键值
 QString INIService::getValue(QString tSection, QString tKey)
 {
     QString resultValue;
@@ -40,7 +40,7 @@ QString INIService::getValue(QString tSection, QString tKey)
     return resultValue;
 }
 
-//获取指定节点内的全部键
+//获取节点内所有键
 QStringList INIService::getAllValue(QString tSection)
 {
     QStringList resultList;
@@ -50,7 +50,7 @@ QStringList INIService::getAllValue(QString tSection)
     return resultList;
 }
 
-//添加值到指定节点的键
+//设置键值
 void INIService::setValue(QString tSection, QString tKey, QString tValue)
 {
     activatedINI->beginGroup(tSection);

@@ -2,11 +2,12 @@
 
 UserProfile::UserProfile()
 {
+    //连接用户配置文件
     INIActivated = new INIService;
     INIActivated->connectINI(userINIPath);
 }
 
-//读取所有用户名和配置信息
+//读取所有用户信息和设置
 void UserProfile::readProfile()
 {
     userAll.clear();
@@ -41,14 +42,17 @@ void UserProfile::readProfile()
     {
         closeDirectly = false;
     }
+    //为统一使用INIService进行文件操作，所有键值均为文本
 }
 
+//保存登录信息
 void UserProfile::saveProfile()
 {
     INIActivated->setValue("Settings","LastName",lastName);
     INIActivated->setValue("Settings","LastPassword",lastPassword);
 }
 
+//保存设置
 void UserProfile::saveSettings()
 {
     INIActivated->setValue("Settings","SaveLastName",(saveLastName?"True":"False"));
@@ -56,25 +60,25 @@ void UserProfile::saveSettings()
     INIActivated->setValue("Settings","closeDirectly",(closeDirectly?"True":"False"));
 }
 
-//返回所有用户名
+//获取所有用户列表
 QStringList UserProfile::getAllUser()
 {
     return userAll;
 }
 
-//返回上次登录用户名
+//获取最后登录用户名
 QString UserProfile::getLastName()
 {
     return lastName;
 }
 
-//返回上次登陆密码
+//获取最后登录密码
 QString UserProfile::getLastPassword()
 {
     return lastPassword;
 }
 
-//返回上次登陆密码
+//获取最后登录邮箱
 QString UserProfile::getLastMail()
 {
     return lastMail;
@@ -83,7 +87,7 @@ QString UserProfile::getLastMail()
 //用户登录
 bool UserProfile::userSignIn(QString tName,QString tPassword)
 {
-    qDebug()<<"userSignIn";
+    //qDebug()<<"userSignIn";
     if(userAll.contains(tName))
     {
         if(INIActivated->getValue(tName,"Password")==tPassword)
@@ -91,17 +95,19 @@ bool UserProfile::userSignIn(QString tName,QString tPassword)
             lastName = tName;
             lastPassword = tPassword;
             saveProfile();
-            qDebug()<<"success";
+            //保存最后登录的用户的信息
+            //qDebug()<<"userSignIn Done";
             return true;
         }
     }
-    qDebug()<<"failure";
+    //qDebug()<<"userSignIn Failure, user doesn't exist";
     return false;
 }
 
-//用户重设密码
+//用户修改密码
 bool UserProfile::userResetPW(QString tName,QString tOldPassword,QString tNewPassword)
 {
+    //qDebug()<<"userResetPW";
     if(userAll.contains(tName))
     {
         if(INIActivated->getValue(tName,"Password")==tOldPassword)
@@ -109,15 +115,19 @@ bool UserProfile::userResetPW(QString tName,QString tOldPassword,QString tNewPas
             INIActivated->setValue(tName,"Password",tNewPassword);
             lastName = "";
             lastPassword = "";
+            //修改密码后移除保存的登录信息
+            //qDebug()<<"userResetPW Done";
             return true;
         }
     }
+    //qDebug()<<"userResetPW Failure, user doesn't exist";
     return false;
 }
 
-//用户忘记密码
+//用户重置密码
 bool UserProfile::userForgetPW(QString tName,QString tMail,QString tNewPassword)
 {
+    //qDebug()<<"userForgetPW";
     if(userAll.contains(tName))
     {
         if(INIActivated->getValue(tName,"Mail")==tMail)
@@ -125,38 +135,43 @@ bool UserProfile::userForgetPW(QString tName,QString tMail,QString tNewPassword)
             INIActivated->setValue(tName,"Password",tNewPassword);
             lastName = "";
             lastPassword = "";
+            //重置密码后移除保存的登录信息
+            //qDebug()<<"userForgetPW Done";
             return true;
         }
     }
+    //qDebug()<<"userForgetPW Failure, user doesn't exist";
     return false;
 }
 
 //用户注册
 bool UserProfile::userSignUp(QString tName,QString tMail,QString tPassword)
 {
-    qDebug()<<"userSignUp";
+    //qDebug()<<"userSignUp";
     if(userAll.contains(tName))
     {
-        qDebug()<<"userSignUp Failure, user exist";
+        //qDebug()<<"userSignUp Failure, user exists";
         return false;
     }
     else
     {
-        qDebug()<<"userSignUp done";
         INIActivated->setValue("UserList",tName,"1");
         INIActivated->setValue(tName,"Name",tName);
         INIActivated->setValue(tName,"Password",tPassword);
         INIActivated->setValue(tName,"Mail",tMail);
         readProfile();
+        //qDebug()<<"userSignUp Done";
         return true;
     }
 }
 
+//查询用户是否存在
 bool UserProfile::userExist(QString tName)
 {
     return userAll.contains(tName);
 }
 
+//查询邮箱是否匹配
 bool UserProfile::mailCheck(QString tName, QString tMail)
 {
     if(!userExist(tName))

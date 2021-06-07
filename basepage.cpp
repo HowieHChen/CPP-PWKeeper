@@ -7,6 +7,7 @@ BasePage::BasePage(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle("BasePage");
+    this->setWindowIcon(QIcon(":/icons/Res/icons/WindowIcon.png"));
     this->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowMinimizeButtonHint);
     this->setAttribute(Qt::WA_TranslucentBackground, true);
     //绘制窗口阴影
@@ -15,6 +16,7 @@ BasePage::BasePage(QWidget *parent) :
     shadow->setColor(QColor(102,102,102));
     shadow->setBlurRadius(20);
     ui->BaseFrame->setGraphicsEffect(shadow);
+    //默认隐藏大标题
     ui->label_ApplicationLarge->hide();
 }
 
@@ -23,44 +25,52 @@ BasePage::~BasePage()
     delete ui;
 }
 
-//注册系统托盘常驻
+//系统托盘常驻
 void BasePage::initPage()
 {
     systemtrayicon = new QSystemTrayIcon(this);
-    QIcon icon = QIcon(":/icons/Res/icons/action/svg/production/ic_account_balance_wallet_24px.svg");
+    QIcon icon = QIcon(":/icons/Res/icons/SystemTrayIcon.png");
     systemtrayicon->setIcon(icon);
     systemtrayicon->setToolTip(QObject::tr("PWKeeper"));
     createActions();
     createMenu();
     systemtrayicon->show();
     connect(systemtrayicon,SIGNAL(activated(QSystemTrayIcon::ActivationReason)),this,SLOT(on_activatedSysTrayIcon(QSystemTrayIcon::ActivationReason)));
+    isInt = 1;
 }
 
-//注销系统托盘常驻
+//从系统托盘移除
 void BasePage::recyclePage()
 {
     delete systemtrayicon;
     systemtrayicon = NULL;
+    isInt = 0;
 }
 
+//设置窗口大标题
 void BasePage::largeTitle()
 {
     ui->label_ApplicationSmall->hide();
     ui->label_ApplicationLarge->show();
 }
 
-//最小化按钮
+//最小化按钮槽函数
 void BasePage::on_toolButton_Minimize_clicked()
 {
     showMinimized();
 }
 
-//关闭按钮
+//关闭按钮槽函数
 void BasePage::on_toolButton_Quit_clicked()
 {
     if(closeDirectly)
     {
-        on_exitAppAction();
+        if(isInt)
+        {
+            recyclePage();
+        }
+        //qDebug()<<"exit";
+        exit(0);
     }
     else
     {
@@ -68,13 +78,13 @@ void BasePage::on_toolButton_Quit_clicked()
     }
 }
 
-//自定义标题栏事件
-//窗口坐标
+//自定义标题栏
+
+//记录窗口坐标
 static QPoint last(0,0);
 //标题栏高度
 const int TITLE_HEIGHT = 50;
-
-//鼠标拖动窗口
+//窗口拖动
 void BasePage::mousePressEvent(QMouseEvent *event)
 {
     if(event->position().y()<TITLE_HEIGHT)
@@ -104,7 +114,7 @@ void BasePage::mouseReleaseEvent(QMouseEvent *event)
     }
 }
 
-//系统托盘事件响应
+//托盘事件
 void BasePage::on_activatedSysTrayIcon(QSystemTrayIcon::ActivationReason reason)
 {
     switch(reason)
@@ -119,6 +129,7 @@ void BasePage::on_activatedSysTrayIcon(QSystemTrayIcon::ActivationReason reason)
     }
 }
 
+//托盘菜单
 void BasePage::createActions()
 {
     mShowMainAction = new QAction(QObject::tr("打开PWKeeper"),this);
@@ -150,6 +161,7 @@ void BasePage::on_exitAppAction()
     exit(0);
 }
 
+//切换关闭按钮功能
 void BasePage::refreshCloseDirectly(bool tclose)
 {
     closeDirectly = tclose;

@@ -22,6 +22,7 @@ BaseDialog::~BaseDialog()
     delete ui;
 }
 
+//初始化对话框
 void BaseDialog::createDialog(int tType, QString tHead, QString tContent)
 {
     if(tType == 1)
@@ -32,12 +33,14 @@ void BaseDialog::createDialog(int tType, QString tHead, QString tContent)
     ui->label_Content->setText(tContent);
 }
 
+//取消按钮点击槽函数
 void BaseDialog::on_buttonCancel_clicked()
 {
     emit buttonCancel_clicked();
     this->close();
 }
 
+//确认按钮点击槽函数
 void BaseDialog::on_buttonOK_clicked()
 {
     emit buttonOK_clicked();

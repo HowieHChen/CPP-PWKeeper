@@ -51,4 +51,7 @@ RESOURCES += \
 
 DISTFILES += \
     Res/close.png \
-    Res/hide.png
+    Res/hide.png \
+    logo.rc
+
+RC_FILE += logo.rc

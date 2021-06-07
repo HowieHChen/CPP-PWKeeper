@@ -7,6 +7,7 @@ ForgetPWPage::ForgetPWPage(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle("忘记密码");
+    //设置Tab键的按下顺序
     ForgetPWPage::setTabOrder(ui->lineEdit_fUserName,ui->lineEdit_fMail);
     ForgetPWPage::setTabOrder(ui->lineEdit_fMail,ui->lineEdit_fNewPassword);
     ForgetPWPage::setTabOrder(ui->lineEdit_fNewPassword,ui->lineEdit_fRepeatPassword);
@@ -18,20 +19,22 @@ ForgetPWPage::~ForgetPWPage()
     delete ui;
 }
 
+//返回登录界面槽函数
 void ForgetPWPage::on_pushButton_Back_clicked()
 {
     emit fSignalShowSignIN();
     this->close();
 }
 
-
+//重置密码槽函数
 void ForgetPWPage::on_pushButton_ResetPW_clicked()
 {
-    bool tResult = resultSignUp;
+    resultSignUp = false;
     QString tName = ui->lineEdit_fUserName->text();
     QString tPassword = ui->lineEdit_fNewPassword->text();
     QString tRepeatPassowrd = ui->lineEdit_fRepeatPassword->text();
     QString tMail=ui->lineEdit_fMail->text();
+    //对用户行为进行初步过滤
     if(tName==""||
        tMail==""||
        tPassword==""||
@@ -51,8 +54,9 @@ void ForgetPWPage::on_pushButton_ResetPW_clicked()
         ui->lineEdit_fNewPassword->setPlaceholderText("两次输入的密码不一致");
         return;
     }
-    emit SignalForgetPW(tName,tPassword,tMail,tResult,reasonF);
-    if(tResult==false)
+    //尝试重置密码
+    emit SignalForgetPW(tName,tPassword,tMail,resultSignUp,reasonF);
+    if(resultSignUp==false)
     {
         ui->lineEdit_fUserName->clear();
         ui->lineEdit_fMail->clear();

@@ -9,7 +9,7 @@ SignInPage::SignInPage(QWidget *parent)
     this->setWindowTitle("登录");
     SignInPage::setTabOrder(ui->lineEdit_Name,ui->lineEdit_Password);
     SignInPage::setTabOrder(ui->lineEdit_Password,ui->lineEdit_Name);
-    initPage();
+    //连接用户管理服务
     currentUser = new UserProfile;
     currentUser->readProfile();
     loadingSettings();
@@ -20,6 +20,7 @@ SignInPage::~SignInPage()
     delete ui;
 }
 
+//加载设置
 void SignInPage::loadingSettings()
 {
     if(currentUser->saveLastName)
@@ -40,10 +41,12 @@ void SignInPage::loadingSettings()
     }
 }
 
+//登录槽函数
 void SignInPage::on_pushButton_SignIn_clicked()
 {
     QString tName = ui->lineEdit_Name->text();
     QString tPassword = ui->lineEdit_Password->text();
+    //对用户行为进行初步过滤
     if(tName==""||
        tPassword=="")
     {
@@ -59,16 +62,17 @@ void SignInPage::on_pushButton_SignIn_clicked()
         ui->lineEdit_Name->setPlaceholderText("用户不存在");
         return;
     }
+    //尝试登陆
     if(currentUser->userSignIn(tName,tPassword))
     {
-        recyclePage();
+        ui->lineEdit_Name->setPlaceholderText("用户名");
         delete currentUser;
         currentUser = NULL;
         this->newMain = new MainPage;
         connect(newMain,SIGNAL(mSignalShowSignIN()),this,SLOT(on_signOutShowSignIn()));
-        //connect(newForget,SIGNAL(SignalForgetPW(QString,QString,QString,bool&,int&)),this,SLOT(on_doForgetPW(QString,QString,QString,bool&,int&)));
         newMain->show();
-        this->hide();
+        this->close();
+        //登陆成功跳转主界面
     }
     else
     {
@@ -78,43 +82,46 @@ void SignInPage::on_pushButton_SignIn_clicked()
     }
 }
 
-
+//注册用户槽函数
 void SignInPage::on_pushButton_SignUp_clicked()
 {
     this->newSignUp = new SignUpPage;
     connect(newSignUp,SIGNAL(SignalShowSignIN()),this,SLOT(on_showSignInAction()));
     connect(newSignUp,SIGNAL(SignalSignUp(QString,QString,QString,bool&,int&)),this,SLOT(on_doSignUp(QString,QString,QString,bool&,int&)));
     newSignUp->show();
-    //this->hide();
+    this->hide();
 }
 
-
+//重置密码槽函数
 void SignInPage::on_pushButton_ForgetPW_clicked()
 {
     this->newForget = new ForgetPWPage;
     connect(newForget,SIGNAL(fSignalShowSignIN()),this,SLOT(on_showSignInAction()));
     connect(newForget,SIGNAL(SignalForgetPW(QString,QString,QString,bool&,int&)),this,SLOT(on_doForgetPW(QString,QString,QString,bool&,int&)));
     newForget->show();
-    //this->hide();
+    this->hide();
 }
 
+//返回登录界面
 void SignInPage::on_showSignInAction()
 {
     this->show();
 }
 
+//注销后返回登录界面
 void SignInPage::on_signOutShowSignIn()
 {
     this->show();
-    initPage();
     currentUser = new UserProfile;
     currentUser->readProfile();
     loadingSettings();
+    //注销用户后重新连接用户管理服务
 }
 
+//注册用户
 void SignInPage::on_doSignUp(QString tName,QString tPassword,QString tMail,bool &tResult,int &tReasonF)
 {
-    qDebug()<<"try call userSignUp";
+    //qDebug()<<"try call userSignUp";
     tResult=false;
     tReasonF=0;
     if(currentUser->userExist(tName))
@@ -130,8 +137,10 @@ void SignInPage::on_doSignUp(QString tName,QString tPassword,QString tMail,bool 
     }
 }
 
+//重置密码
 void SignInPage::on_doForgetPW(QString tName,QString tNewPassword,QString tMail,bool &tResult,int &tReasonF)
 {
+    //qDebug()<<"try call userForgetPW";
     tResult=false;
     tReasonF=0;
     if(!currentUser->userExist(tName))
@@ -139,7 +148,7 @@ void SignInPage::on_doForgetPW(QString tName,QString tNewPassword,QString tMail,
         tReasonF=1;
         return;
     }
-    if(currentUser->mailCheck(tName,tMail))
+    if(!currentUser->mailCheck(tName,tMail))
     {
         tReasonF=2;
         return;

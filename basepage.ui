@@ -206,13 +206,13 @@ QToolButton:pressed{
 }
 QToolButton:hover{
 	border-width:0;
-	background-color:#d0e8ff;
+	background-color:#ffcdd2;
 	border-radius:15px;
 	color:#0a66c2;
 }
 QToolButton:pressed{
 	border-width:0;
-	background-color:#d0e8ff;
+	background-color:#ffcdd2;
 	border-radius:15px;
 	color:#0a66c2;
 }</string>
