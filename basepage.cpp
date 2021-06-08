@@ -74,7 +74,14 @@ void BasePage::on_toolButton_Quit_clicked()
     }
     else
     {
-        this->close();
+        if(isInt)
+        {
+            this->hide();
+        }
+        else
+        {
+            this->close();
+        }
     }
 }
 
