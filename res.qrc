@@ -7,5 +7,6 @@
         <file>Res/icons/ui/hide.png</file>
         <file>Res/icons/WindowIcon.png</file>
         <file>Res/icons/SystemTrayIcon.png</file>
+        <file>Res/icons/PWKeeper.png</file>
     </qresource>
 </RCC>

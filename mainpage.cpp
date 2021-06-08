@@ -101,12 +101,18 @@ void MainPage::on_pushButton_view_clicked()
 //添加页面槽函数
 void MainPage::on_pushButton_add_clicked()
 {
+    ui->lineEdit_21label->clear();
+    ui->lineEdit_22name->clear();
+    ui->lineEdit_23password->clear();
+    ui->lineEdit_24target->clear();
+    ui->lineEdit_25others->clear();
     ui->stackedWidget->setCurrentWidget(ui->page_add);
 }
 
 //导出页面槽函数
 void MainPage::on_pushButton_out_clicked()
 {
+    ui->lineEdit_fileName->clear();
     ui->stackedWidget->setCurrentWidget(ui->page_out);
 }
 
@@ -116,9 +122,7 @@ void MainPage::on_pushButton_signout_clicked()
     //生成对话框，跳转到对应槽函数
     customDialog = new BaseDialog;
     customDialog->createDialog(0,"确定要注销吗？","注销将退出当前登陆账号");
-    connect(customDialog,SIGNAL(buttonCancel_clicked()),this,SLOT(dialog_notify()));
     connect(customDialog,SIGNAL(buttonOK_clicked()),this,SLOT(dialog_signoutOK()));
-    customDialog->setWindowModality(Qt::ApplicationModal);
     customDialog->show();
 }
 
@@ -176,22 +180,38 @@ void MainPage::on_pushButton_additem_clicked()
     //对用户行为进行初步过滤
     if(tlabel == "")
     {
-        ui->lineEdit_21label->setPlaceholderText("标签不能为空");
+        //生成对话框提示
+        customDialog = new BaseDialog;
+        customDialog->createDialog(1,"添加失败","标签不能为空");
+        customDialog->setWindowModality(Qt::ApplicationModal);
+        customDialog->show();
         return;
     }
     if(tname == "")
     {
-        ui->lineEdit_22name->setPlaceholderText("用户名不能为空");
+        //生成对话框提示
+        customDialog = new BaseDialog;
+        customDialog->createDialog(1,"添加失败","用户名不能为空");
+        customDialog->setWindowModality(Qt::ApplicationModal);
+        customDialog->show();
         return;
     }
     if(tpassword == "")
     {
-        ui->lineEdit_23password->setPlaceholderText("密码不能为空");
+        //生成对话框提示
+        customDialog = new BaseDialog;
+        customDialog->createDialog(1,"添加失败","密码不能为空");
+        customDialog->setWindowModality(Qt::ApplicationModal);
+        customDialog->show();
         return;
     }
     if(mainPWM->labelExist(tlabel))
     {
-        ui->lineEdit_21label->setPlaceholderText("标签已存在");
+        //生成对话框提示
+        customDialog = new BaseDialog;
+        customDialog->createDialog(1,"添加失败","标签已存在");
+        customDialog->setWindowModality(Qt::ApplicationModal);
+        customDialog->show();
         ui->lineEdit_21label->clear();
         return;
     }
@@ -202,15 +222,10 @@ void MainPage::on_pushButton_additem_clicked()
     ui->lineEdit_23password->clear();
     ui->lineEdit_24target->clear();
     ui->lineEdit_25others->clear();
-    ui->lineEdit_21label->setPlaceholderText("标签");
-    ui->lineEdit_22name->setPlaceholderText("用户名");
-    ui->lineEdit_23password->setPlaceholderText("密码");
     refreshLabelList();
     //生成对话框提示
     customDialog = new BaseDialog;
     customDialog->createDialog(1,"添加成功","该项目已经添加到您的密码本");
-    connect(customDialog,SIGNAL(buttonOK_clicked()),this,SLOT(dialog_notify()));
-    customDialog->setWindowModality(Qt::ApplicationModal);
     customDialog->show();
 }
 
@@ -232,37 +247,48 @@ void MainPage::on_pushButton_save_clicked()
     //对用户行为进行初步过滤
     if(tlabel == "")
     {
-        ui->lineEdit_21label->setPlaceholderText("标签不能为空");
+        //生成对话框提示
+        customDialog = new BaseDialog;
+        customDialog->createDialog(1,"保存失败","标签不能为空");
+        customDialog->setWindowModality(Qt::ApplicationModal);
+        customDialog->show();
         return;
     }
     if(tname == "")
     {
-        ui->lineEdit_22name->setPlaceholderText("用户名不能为空");
+        //生成对话框提示
+        customDialog = new BaseDialog;
+        customDialog->createDialog(1,"保存失败","用户名不能为空");
+        customDialog->setWindowModality(Qt::ApplicationModal);
+        customDialog->show();
         return;
     }
     if(tpassword == "")
     {
-        ui->lineEdit_23password->setPlaceholderText("密码不能为空");
+        //生成对话框提示
+        customDialog = new BaseDialog;
+        customDialog->createDialog(1,"保存失败","密码不能为空");
+        customDialog->setWindowModality(Qt::ApplicationModal);
+        customDialog->show();
         return;
     }
     //
     if(tlabel != mainPWM->getNowLabel() && mainPWM->labelExist(tlabel))
     {
-        ui->lineEdit_21label->setPlaceholderText("标签已存在");
-        ui->lineEdit_21label->clear();
+        //生成对话框提示
+        ui->lineEdit_11label->clear();
+        customDialog = new BaseDialog;
+        customDialog->createDialog(1,"保存失败","标签已存在");
+        customDialog->setWindowModality(Qt::ApplicationModal);
+        customDialog->show();
         return;
     }
     //尝试保存修改
     mainPWM->editSelectedLabel(tlabel,tname,tpassword,ttarget,tothers);
-    ui->lineEdit_21label->setPlaceholderText("标签");
-    ui->lineEdit_22name->setPlaceholderText("用户名");
-    ui->lineEdit_23password->setPlaceholderText("密码");
     refreshLabelList();
     //生成对话框提示
     customDialog = new BaseDialog;
     customDialog->createDialog(1,"保存成功","该项目的信息已经更新");
-    connect(customDialog,SIGNAL(buttonOK_clicked()),this,SLOT(dialog_notify()));
-    customDialog->setWindowModality(Qt::ApplicationModal);
     customDialog->show();
 }
 
@@ -278,9 +304,7 @@ void MainPage::on_pushButton_delete_clicked()
     //生成对话框，跳转到对应槽函数
     customDialog = new BaseDialog;
     customDialog->createDialog(0,"确定要删除吗？","将会删除此项目，此操作不可撤销");
-    connect(customDialog,SIGNAL(buttonCancel_clicked()),this,SLOT(dialog_notify()));
     connect(customDialog,SIGNAL(buttonOK_clicked()),this,SLOT(dialog_deleteOK()));
-    customDialog->setWindowModality(Qt::ApplicationModal);
     customDialog->show();
 }
 
@@ -311,7 +335,6 @@ void MainPage::dialog_deleteOK()
     //生成对话框提示
     customDialog = new BaseDialog;
     customDialog->createDialog(1,"删除成功","该项目已从您的密码本中移除");
-    connect(customDialog,SIGNAL(buttonOK_clicked()),this,SLOT(dialog_notify()));
     customDialog->setWindowModality(Qt::ApplicationModal);
     customDialog->show();
 }
@@ -330,20 +353,17 @@ void MainPage::dialog_signoutOK()
     //qDebug()<<"Done";
 }
 
-//对话框点击确认按钮
-void MainPage::dialog_notify()
-{
-    delete customDialog;
-    customDialog = NULL;
-}
-
 //导出密码槽函数
 void MainPage::on_pushButton_output_clicked()
 {
     QString fileName = ui->lineEdit_fileName->text();
     if(fileName == "")
     {
-        ui->lineEdit_fileName->setPlaceholderText("请输入文件名");
+        //生成对话框提示
+        customDialog = new BaseDialog;
+        customDialog->createDialog(1,"导出失败","请输入文件名");
+        customDialog->setWindowModality(Qt::ApplicationModal);
+        customDialog->show();
         return;
     }
     QString filePath = QFileDialog::getExistingDirectory(this,"请选择导出的路径",QDir::homePath());
@@ -353,8 +373,6 @@ void MainPage::on_pushButton_output_clicked()
         //生成对话框提示
         customDialog = new BaseDialog;
         customDialog->createDialog(1,"导出成功","文件" + fileName + ".txt 已保存至" + '\n' + filePath);
-        connect(customDialog,SIGNAL(buttonOK_clicked()),this,SLOT(dialog_notify()));
-        customDialog->setWindowModality(Qt::ApplicationModal);
         customDialog->show();
     }
     else
@@ -362,11 +380,8 @@ void MainPage::on_pushButton_output_clicked()
         //生成对话框提示
         customDialog = new BaseDialog;
         customDialog->createDialog(1,"导出失败","文件" + fileName + "可能已存在" + '\n' + "请尝试更换文件名");
-        connect(customDialog,SIGNAL(buttonOK_clicked()),this,SLOT(dialog_notify()));
-        customDialog->setWindowModality(Qt::ApplicationModal);
         customDialog->show();
     }
-    ui->lineEdit_21label->clear();
-    ui->lineEdit_fileName->setPlaceholderText("文件名");
+    ui->lineEdit_fileName->clear();
 }
 

@@ -74,7 +74,7 @@ void BasePage::on_toolButton_Quit_clicked()
     }
     else
     {
-        this->hide();
+        this->close();
     }
 }
 

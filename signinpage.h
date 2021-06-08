@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "basepage.h"
+#include "basedialog.h"
 #include "userprofile.h"
 #include "signuppage.h"
 #include "forgetpwpage.h"
@@ -19,6 +20,7 @@ class SignInPage : public BasePage
     SignUpPage *newSignUp;
     ForgetPWPage *newForget;
     MainPage *newMain;
+    BaseDialog *newDialog;
 
 public:
     SignInPage(QWidget *parent = nullptr);

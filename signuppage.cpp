@@ -7,6 +7,7 @@ SignUpPage::SignUpPage(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle("注册");
+    this->setWindowModality(Qt::ApplicationModal);
     //设置Tab键的按下顺序
     SignUpPage::setTabOrder(ui->lineEdit_Name,ui->lineEdit_Password);
     SignUpPage::setTabOrder(ui->lineEdit_Password,ui->lineEdit_Mail);
@@ -29,6 +30,7 @@ void SignUpPage::on_pushButton_BackSignIn_clicked()
 void SignUpPage::on_pushButton_DoSignUp_clicked()
 {
     resultSignUp = false;
+    QString tTip;
     QString tName = ui->lineEdit_Name->text();
     QString tPassword = ui->lineEdit_Password->text();
     QString tMail=ui->lineEdit_Mail->text();
@@ -40,7 +42,9 @@ void SignUpPage::on_pushButton_DoSignUp_clicked()
         ui->lineEdit_Name->clear();
         ui->lineEdit_Mail->clear();
         ui->lineEdit_Password->clear();
-        ui->lineEdit_Name->setPlaceholderText("请填写完整信息");
+        newSignUpDialog = new BaseDialog;
+        newSignUpDialog->createDialog(1,"注册失败","请填写完整信息");
+        newSignUpDialog->show();
         return;
     }
     //尝试注册用户
@@ -52,12 +56,15 @@ void SignUpPage::on_pushButton_DoSignUp_clicked()
         ui->lineEdit_Password->clear();
         if(reasonF==1)
         {
-            ui->lineEdit_Name->setPlaceholderText("用户已存在");
+            tTip = "用户已存在";
         }
         else
         {
-            ui->lineEdit_Name->setPlaceholderText("注册失败请重试");
+            tTip = "注册失败请重试";
         }
+        newSignUpDialog = new BaseDialog;
+        newSignUpDialog->createDialog(1,"注册失败",tTip);
+        newSignUpDialog->show();
         return;
     }
     this->close();

@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "basepage.h"
+#include "basedialog.h"
 
 namespace Ui {
 class ForgetPWPage;
@@ -11,6 +12,8 @@ class ForgetPWPage;
 class ForgetPWPage : public BasePage
 {
     Q_OBJECT
+
+    BaseDialog *newForgetPWDialog;
 
 public:
     explicit ForgetPWPage(QWidget *parent = nullptr);

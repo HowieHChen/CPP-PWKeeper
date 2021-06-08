@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "basepage.h"
+#include "basedialog.h"
 
 namespace Ui {
 class SignUpPage;
@@ -11,6 +12,8 @@ class SignUpPage;
 class SignUpPage : public BasePage
 {
     Q_OBJECT
+
+    BaseDialog *newSignUpDialog;
 
 public:
     explicit SignUpPage(QWidget *parent = nullptr);

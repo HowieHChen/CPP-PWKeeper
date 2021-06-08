@@ -66,8 +66,8 @@ signals:
 private:
     Ui::BasePage *ui;
 
-    //关闭按钮功能，缺省为1（直接退出）
-    bool closeDirectly=1;
+    //关闭按钮功能，缺省为0（仅关闭不退出）
+    bool closeDirectly=0;
 
     //保存是否有托盘常驻，缺省为0（无）
     bool isInt = 0;

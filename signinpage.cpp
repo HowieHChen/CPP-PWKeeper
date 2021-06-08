@@ -13,6 +13,7 @@ SignInPage::SignInPage(QWidget *parent)
     currentUser = new UserProfile;
     currentUser->readProfile();
     loadingSettings();
+    refreshCloseDirectly(1);
 }
 
 SignInPage::~SignInPage()
@@ -52,20 +53,25 @@ void SignInPage::on_pushButton_SignIn_clicked()
     {
         ui->lineEdit_Name->clear();
         ui->lineEdit_Password->clear();
-        ui->lineEdit_Name->setPlaceholderText("请输入完整信息");
+        //生成对话框提示
+        newDialog = new BaseDialog;
+        newDialog->createDialog(1,"登录失败","请输入用户名和密码");
+        newDialog->show();
         return;
     }
     if(!currentUser->userExist(tName))
     {
         ui->lineEdit_Name->clear();
         ui->lineEdit_Password->clear();
-        ui->lineEdit_Name->setPlaceholderText("用户不存在");
+        //生成对话框提示
+        newDialog = new BaseDialog;
+        newDialog->createDialog(1,"登录失败","用户不存在");
+        newDialog->show();
         return;
     }
     //尝试登陆
     if(currentUser->userSignIn(tName,tPassword))
     {
-        ui->lineEdit_Name->setPlaceholderText("用户名");
         delete currentUser;
         currentUser = NULL;
         this->newMain = new MainPage;
@@ -78,7 +84,10 @@ void SignInPage::on_pushButton_SignIn_clicked()
     {
         ui->lineEdit_Name->clear();
         ui->lineEdit_Password->clear();
-        ui->lineEdit_Name->setPlaceholderText("密码错误");
+        //生成对话框提示
+        newDialog = new BaseDialog;
+        newDialog->createDialog(1,"登录失败","密码错误");
+        newDialog->show();
     }
 }
 
@@ -89,7 +98,7 @@ void SignInPage::on_pushButton_SignUp_clicked()
     connect(newSignUp,SIGNAL(SignalShowSignIN()),this,SLOT(on_showSignInAction()));
     connect(newSignUp,SIGNAL(SignalSignUp(QString,QString,QString,bool&,int&)),this,SLOT(on_doSignUp(QString,QString,QString,bool&,int&)));
     newSignUp->show();
-    this->hide();
+    //this->hide();
 }
 
 //重置密码槽函数
@@ -99,7 +108,7 @@ void SignInPage::on_pushButton_ForgetPW_clicked()
     connect(newForget,SIGNAL(fSignalShowSignIN()),this,SLOT(on_showSignInAction()));
     connect(newForget,SIGNAL(SignalForgetPW(QString,QString,QString,bool&,int&)),this,SLOT(on_doForgetPW(QString,QString,QString,bool&,int&)));
     newForget->show();
-    this->hide();
+    //this->hide();
 }
 
 //返回登录界面

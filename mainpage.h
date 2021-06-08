@@ -91,9 +91,6 @@ private slots:
     //对话框点击确认注销按钮
     void dialog_signoutOK();
 
-    //对话框点击确认按钮
-    void dialog_notify();
-
     //导出密码槽函数
     void on_pushButton_output_clicked();
 

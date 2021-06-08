@@ -7,6 +7,7 @@ ForgetPWPage::ForgetPWPage(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle("忘记密码");
+    this->setWindowModality(Qt::ApplicationModal);
     //设置Tab键的按下顺序
     ForgetPWPage::setTabOrder(ui->lineEdit_fUserName,ui->lineEdit_fMail);
     ForgetPWPage::setTabOrder(ui->lineEdit_fMail,ui->lineEdit_fNewPassword);
@@ -30,6 +31,7 @@ void ForgetPWPage::on_pushButton_Back_clicked()
 void ForgetPWPage::on_pushButton_ResetPW_clicked()
 {
     resultSignUp = false;
+    QString tTip;
     QString tName = ui->lineEdit_fUserName->text();
     QString tPassword = ui->lineEdit_fNewPassword->text();
     QString tRepeatPassowrd = ui->lineEdit_fRepeatPassword->text();
@@ -44,14 +46,20 @@ void ForgetPWPage::on_pushButton_ResetPW_clicked()
         ui->lineEdit_fMail->clear();
         ui->lineEdit_fNewPassword->clear();
         ui->lineEdit_fRepeatPassword->clear();
-        ui->lineEdit_fUserName->setPlaceholderText("请填写完整信息");
+        //生成对话框提示
+        newForgetPWDialog = new BaseDialog;
+        newForgetPWDialog->createDialog(1,"重置失败","请填写完整信息");
+        newForgetPWDialog->show();
         return;
     }
     if(tPassword!=tRepeatPassowrd)
     {
         ui->lineEdit_fNewPassword->clear();
         ui->lineEdit_fRepeatPassword->clear();
-        ui->lineEdit_fNewPassword->setPlaceholderText("两次输入的密码不一致");
+        //生成对话框提示
+        newForgetPWDialog = new BaseDialog;
+        newForgetPWDialog->createDialog(1,"重置失败","两次输入的密码不一致");
+        newForgetPWDialog->show();
         return;
     }
     //尝试重置密码
@@ -64,18 +72,20 @@ void ForgetPWPage::on_pushButton_ResetPW_clicked()
         ui->lineEdit_fRepeatPassword->clear();
         if(reasonF==1)
         {
-            ui->lineEdit_fUserName->setPlaceholderText("用户不存在");
+            tTip = "用户不存在";
         }
         else if(reasonF==2)
         {
-            ui->lineEdit_fUserName->setPlaceholderText("邮箱错误");
+            tTip = "邮箱不匹配";
         }
         else
         {
-            ui->lineEdit_fUserName->setPlaceholderText("密码重置失败请重试");
+            tTip = "密码重置失败请重试";
         }
+        newForgetPWDialog = new BaseDialog;
+        newForgetPWDialog->createDialog(1,"重置失败",tTip);
+        newForgetPWDialog->show();
         return;
     }
     this->close();
 }
-

@@ -9,6 +9,7 @@ BaseDialog::BaseDialog(QWidget *parent) :
     this->setWindowTitle("PWKeeper");
     this->setWindowFlags(Qt::SplashScreen|Qt::WindowStaysOnTopHint|Qt::FramelessWindowHint);
     this->setAttribute(Qt::WA_TranslucentBackground, true);
+    this->setWindowModality(Qt::ApplicationModal);
     //绘制窗口阴影
     QGraphicsDropShadowEffect *shadow = new QGraphicsDropShadowEffect(this);
     shadow->setOffset(0, 0);
